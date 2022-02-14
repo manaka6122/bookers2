@@ -1,7 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'books/list', book: @book %>
-    
+    <%= render 'books/list', user: @user, book: @book %>
+
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table>
@@ -16,7 +16,7 @@
             <tr>
               <td>
                 <%= link_to  user_path(user.id) do %>
-                <%= image_tag @user.get_profile_image,  class="attachment user profile_image fallback" %>
+                <%= image_tag @user.get_profile_image,  class: 'attachment user profile_image fallback' %>
                 <% end %>
               </td>
               <td>
@@ -31,6 +31,6 @@
         </thead>
       </table>
     </div>
-    
+
   </div>
 </div>

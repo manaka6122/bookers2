@@ -8,7 +8,7 @@
           <% @book.each do |book| %>
           <tr>
             <td>
-              <%= image_tag book.user.get_profile_image, class="attachment user profile_image fallback" %><br>
+              <%= image_tag book.user.get_profile_image, class=: 'attachment user profile_image fallback' %><br>
               <%= link_to book.user.name, user_path(user.id) %>
             </td>
             <tb>
@@ -18,10 +18,10 @@
               <%= book.body %>
             </tb>
             <tb>
-              <%= link_to "Edit", edit_book_path(book.id), class="btn btn-sm btn-success" %>
+              <%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success' %>
             </tb>
             <tb>
-              <%= link_to "Destroy", destroy_book_path(book), method: :delete, "data-confirm" => "本当に消しますか？", class="btn btn-sm btn-danger" %>
+              <%= link_to "Destroy", destroy_book_path(@book.id), method: :delete, "data-confirm" => "本当に消しますか？", class="btn btn-sm btn-danger" %>
             </tb>
           </tr>
           <% end %>
