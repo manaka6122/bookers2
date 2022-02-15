@@ -1,24 +1,32 @@
 <div class="container">
-  <dev class="row">
+  <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>Usser info</h2>
-      <%= form_with model: @user, url: update_user_path(@user.id), method: :patch, local:true do |f| %>
+      <%= form_with model: @user, url: user_path(@user.id), method: :patch, local:true do |f| %>
+      <% if @user.errors.any? %>
+        <%= @user.errors.count %>error prohibited this obj from being saved:
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>
       <div class="form-group">
-        <label for="user_name">Name</label>
-        <%= f.text_fiel :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+        <label for="user_name">Name</label><br>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
       </div>
       <div class="form-group">
-        <label for="user_image">Image</label>
-        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+        <label for="user_image">Image</label><br>
+        <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept:"image/*" %>
       </div>
       <div class="form-group">
-        <label for="user_introduction">Introduction</label>
-          <%= f.text_area :introduction, placeholder: "自己紹介文" %>
+        <label for="user_introduction">Introduction</label><br>
+        <%= f.text_area :introduction, placeholder:"自己紹介文" %>
       </div>
       <div class="form-group">
         <%= f.submit 'Update User' %>
       </div>
       <% end %>
     </div>
-  </dev>
+  </div>
 </div>

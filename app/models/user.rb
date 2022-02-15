@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+
+
   has_many :books, dependent: :destroy
 
   def get_profile_image(width, height)
@@ -15,4 +17,7 @@ class User < ApplicationRecord
     end
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  validates :name, presence: true, length: 2..20,  uniqueness: true
+  validates :introduction, length: { maximum: 50 }
 end
