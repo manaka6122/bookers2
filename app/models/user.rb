@@ -4,10 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  def self.guest
+    find_or_create_by!(name: 'guestuser', email: 'guest@example.com') do |user|
+      user.password = SecureRamdom.urlsafe_base64
+      user.name ="guestuser"
+    end
+  end
+  
+  
+
+
   has_one_attached :profile_image
-
-
-
   has_many :books, dependent: :destroy
 
   def get_profile_image(width, height)
