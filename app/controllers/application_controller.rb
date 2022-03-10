@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-
-
   protected
 
   def configre_permitted_parameters

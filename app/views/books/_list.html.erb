@@ -3,8 +3,6 @@
       <h2>User info</h2>
       <%= image_tag user.get_profile_image(63, 63), class:"attachment user profile_image fallback" %>
       <table class="table">
-        <tbody>
-          <tr></tr>
           <tr>
             <th>name</th>
             <th><%= user.name %></th>
@@ -13,12 +11,11 @@
             <th>introduction</th>
             <th><%= user.introduction %></th>
           </tr>
-        </tbody>
       </table>
-      <% if!(user.name == 'guestuser') %>
+      <% if !(user.name == "guestuser") %>
       <div class="row">
         <%= link_to edit_user_path(user.id), class:"btn btn-outline-secondary btn-block" do %>
-        <i class="fas fa-user-cog"></i>
+          <i class="fas fa-user-cog"></i>
         <% end %>
       </div>
       <% end %>
@@ -32,8 +29,30 @@
         <label for="book_body">Option</label><br>
         <%= f.text_field :body %>
       </div>
+      <% if book.id === nil %>
+      <div class="form-group" id="star">
+        <%= f.label :rate %>
+        <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
+      </div>
+      
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#star').empty();
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'book[rate]',
+          half: true,
+        });
+      })
+      </script>
+      <% else %>
+        <%= render "static_rate", book: book %>
+      <% end %>
       <div class="form-group">
-        <%= f.submit 'Create Book', class:"btn btn-success" %>
+        <%= f.submit 'Create Book', class: "btn btn-success" %>
       </div>
       <% end %>
     </div>

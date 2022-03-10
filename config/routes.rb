@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: "homes#top"
-   devise_scope :user do
+  devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-  devise_for :users
+  
   get 'home/about' => "homes#about", as: 'about'
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   resources :users, only: [:index, :show, :edit, :update]
