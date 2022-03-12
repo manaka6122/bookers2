@@ -17,8 +17,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.order(ctrate_at: "DESC")
-    @books_rate = Book.all.order(rade: "DESC")
+    @books = Book.all.order(params[:sort])
     @book = Book.new
     @user = current_user
   end
